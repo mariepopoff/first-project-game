@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Where is Charlie ?</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <link rel="stylesheet" type="text/css" href="/Magnifier.js/magnifier.css" />
+    <script type="module" src="/home.js"></script>
+    <script type="module" src="/app.js"></script>
+    <script type="text/javascript" src="/Event.js/Event.js"></script>
+    <script type="text/javascript" src="/Magnifier.js/Magnifier.js"></script>
+
+
+  </head>
+  <body>
+    <nav>
+      
+      <button id ="homescreen-btn" type="button" class="heartbeat" onclick="window.location.href='/home.html'">HOMESCREEN</button>
+      <div id="title-game">
+        <h1 id="title">WHERE IS CHARLIE ?</h1>
+        <img id="loupe" src="/images/loupe.gif" alt="loupe">
+      </div>
+      <div id="kpi">
+        <div id="high-score">MAX SCORE:<span id="high-number">0</span></div>
+        <div id="score-title">SCORE:<span id="score-number">0</span></div>
+        <div id="clock">CLOCK:<span id="time">00:30</span></div>
+      </div>
+      
+    </nav>
+
+    <div id="main">
+      <img id="charlie-gauche" src="/images/cover.jpeg" alt="cover" height="500">
+      <div id="board">
+          <map name="charlie-clickable"> <area id="area-clickable" shape="poly" coords="" ></map>
+            <img id ="game-img" src="" alt="First round of the game" width=1250 height=700 usemap="#charlie-clickable" class="magnifier-thumb-wrapper"/>
+      </div>
+      <img id="charlie-droite" src="/images/waldo droite.png" alt="cover" height="500">
+    </div>
+ 
+
+
+    
+    <h2 id="instruction">Find Charlie before the time runs out !</h2>
+
+
+
+
+    <div id="winning-box" class="modal">
+        <div class="modal-content">
+          <img src="/images/charlie-win.gif" alt="charlie-win" class="charlie-win">
+          <div class="container-winning">
+            <div>
+            <p>
+             <h1>Congrats</h1>
+            <div>You found Charlie on time ! Let's go for the next round !</div>
+            <div class="container">
+              <div class="high-score-recap">MAX SCORE:<br> <span class="high-score-number-recap">0</span></div>
+              <div class="score-recap">SCORE:<br> <span class="score-number-recap"><br></span></div>
+              <div class="clock-recap">CLOCK:<br><span class="time-number-recap"><br></span></div>
+            </div>
+            </p>
+          </div>
+          
+            
+            <button id="next-round-btn" class="heartbeat">NEXT ROUND</button>
+          </div>
+        </div>
+
+    </div>
+
+    <div id="end-game" class="modal">
+        <div class="modal-content">
+          <img src="/images/charlie-win.gif" alt="charlie-win" class="charlie-win">
+          <div class="container-winning">
+            <div>
+            <p>
+             <h1>Wow ! You finished all the game !</h1>
+            <div>You are a super detective ! </div>
+            <div class="container">
+            <div class="high-score-recap">MAX SCORE:<br> <span class="high-score-number-recap"><br>0</span></div>
+            <div class="score-recap">SCORE:<br> <span class="score-number-recap"><br></span></div>
+          </div>
+            </p>
+          </div>
+            
+            <button id="home-btn" class="heartbeat">START AGAIN</button>
+          </div>
+        </div>
+
+    </div>
+
+    <div id="losing-box" class="modal">
+        <div class="modal-content">
+          <img src="/images/charlie-lost.gif" alt="charlie-lost" class="charlie-lost">
+          <div class="container-losing">
+            <p>
+             <h1>GAME OVER</h1>
+            <div>You did not find Charlie on time !</div>
+            <div class="container">
+            <div class="score-recap">SCORE:<br> <span class="score-number-recap"><br></span></div>
+          </div>
+            </p>
+            
+            <button id="start-again-btn" class="heartbeat" >START AGAIN</button>
+          </div>
+        </div>
+
+    </div>
+
+
+
+
+  
+
+  <footer>
+    <p>© 2021 mariepopi</p>
+  </footer>
+</html>
