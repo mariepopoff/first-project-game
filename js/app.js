@@ -83,7 +83,6 @@ function printWin() {
   score = Number(myScore.textContent) + Number(myClock.innerHTML.substr(3));
   time = myClock.innerHTML;
   myScore.textContent = score;
-
   clearInterval(myIntervalId);
   alertWin();
 }
