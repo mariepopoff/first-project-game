@@ -15,7 +15,7 @@ myArrayCoordinates = ["126,517 162,517 162,575 126,575", "317,508 350,508 350,54
 localStorage.setItem("theArrayImages", JSON.stringify(myArrayImages));
 localStorage.setItem("theArrayCoordinates", JSON.stringify(myArrayCoordinates));
 localStorage.setItem("theArrayImagesZoom", JSON.stringify(myArrayImagesZoom));
-window.location.href='/index.html';
+window.location.href='./home.html';
 }
 
 function openMediumGame () {
@@ -25,7 +25,7 @@ function openMediumGame () {
     localStorage.setItem("theArrayImages", JSON.stringify(myArrayImages));
 localStorage.setItem("theArrayCoordinates", JSON.stringify(myArrayCoordinates));
 localStorage.setItem("theArrayImagesZoom", JSON.stringify(myArrayImagesZoom));
-    window.location.href='/index.html';
+    window.location.href='./home.html';
 }
 
 function openDifficultGame () {
@@ -35,7 +35,7 @@ function openDifficultGame () {
     localStorage.setItem("theArrayImages", JSON.stringify(myArrayImages));
 localStorage.setItem("theArrayCoordinates", JSON.stringify(myArrayCoordinates));
 localStorage.setItem("theArrayImagesZoom", JSON.stringify(myArrayImagesZoom));
-    window.location.href='/index.html';
+    window.location.href='./home.html';
 }
 easyBtn.addEventListener("click", openEasyGame);
 mediumBtn.addEventListener("click", openMediumGame);

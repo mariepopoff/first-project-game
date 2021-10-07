@@ -67,7 +67,7 @@ highScoreFinal.innerHTML = localStorage.getItem("highestScore");
 timingRecap.innerHTML = time;
 
 (index === arrayImages.length) ? endGame.style.display = "block" : myWinningBox.style.display ="block";
-endBtn.addEventListener("click", () => window.location.href='/home.html');
+endBtn.addEventListener("click", () => window.location.href='./index.html');
 }
 
 function alertLose () {
@@ -137,7 +137,7 @@ function printLose () {
     if (document.querySelector('#time').textContent === "00:00") {
         myClockButton.classList.toggle("vibrate-1");
         alertLose();
-        refreshBtn.addEventListener("click", () => window.location.href='/home.html');
+        refreshBtn.addEventListener("click", () => window.location.href='./index.html');
         clearInterval(myIntervalId);
         clearInterval(intervalID);
         clearInterval(fewtimeID);
