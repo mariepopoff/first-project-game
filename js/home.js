@@ -5,10 +5,8 @@ let myArrayImages = [];
 let myArrayImagesZoom =[];
 let myArrayCoordinates = [];
 
-
-
+// opens the html page related to the game with the easy level informations (images, zoom images, coordinates of the clickable area)
 function openEasyGame () {
-
 myArrayImages = ["./images/first-round.png","./images/fifth round eausy.png","./images/third-round.png" ];
 myArrayImagesZoom = ["./images/first-round-zoom.png","./images/fifth round eausy-zoom.png","./images/third-round-zoom.png" ];
 myArrayCoordinates = ["126,517 162,517 162,575 126,575", "317,508 350,508 350,547 317,547", "1033,136 1069,136 1069,182 1033,182 "];
@@ -18,6 +16,7 @@ localStorage.setItem("theArrayImagesZoom", JSON.stringify(myArrayImagesZoom));
 window.location.href='./home.html';
 }
 
+// opens the html page related to the game with the medium level informations (images, zoom images, coordinates of the clickable area)
 function openMediumGame () {
     myArrayImages = [ "./images/sixth-round-easy.png", "./images/medium.png", "./images/fourth-round.png"];
     myArrayImagesZoom = [ "./images/sixth-round-easy-zoom.png", "./images/medium-zoom.png", "./images/fourth-round-zoom.png"];
@@ -28,6 +27,7 @@ localStorage.setItem("theArrayImagesZoom", JSON.stringify(myArrayImagesZoom));
     window.location.href='./home.html';
 }
 
+// opens the html page related to the game with the difficult level informations (images, zoom images, coordinates of the clickable area)
 function openDifficultGame () {
     myArrayImages = ["./images/seventh-round.png","./images/eight-round.png","./images/ninth-round.png"];
     myArrayImagesZoom = ["./images/seventh-round-zoom.png","./images/eight-round-zoom.png","./images/ninth-round-zoom.png"];
@@ -37,6 +37,8 @@ localStorage.setItem("theArrayCoordinates", JSON.stringify(myArrayCoordinates));
 localStorage.setItem("theArrayImagesZoom", JSON.stringify(myArrayImagesZoom));
     window.location.href='./home.html';
 }
+
+// depending on the level clicked, calls the good function to start the game
 easyBtn.addEventListener("click", openEasyGame);
 mediumBtn.addEventListener("click", openMediumGame);
 difficultBtn.addEventListener("click", openDifficultGame);

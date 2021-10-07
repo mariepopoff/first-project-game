@@ -26,6 +26,8 @@ let index = 0;
 let arrayImages = [];
 let arrayCoordinates = [];
 let arrayImagesCoordinates = [];
+
+// checks if there is a highest score located in the storage when launching a new game
 if (localStorage.getItem("highestScore") > 0) {
   highScoreRecap.innerHTML = localStorage.getItem("highestScore");
   highestScore.innerHTML = localStorage.getItem("highestScore");
@@ -34,69 +36,45 @@ if (localStorage.getItem("highestScore") > 0) {
   localStorage.setItem("highestScore", "0");
 }
 
+// if the player clicks on Charlie, we alert him that he won
 myClickableArea.addEventListener("click", printWin);
 
+// if the player clicks on "next round" on the modal, the modal goes away, the next picture pops-up, the coordinates of the clickable area change, the zoom image changes and the timer starts again
 nextRoundBtn.onclick = function () {
   myWinningBox.style.display = "none";
   changeImage();
-  console.log(arrayImagesCoordinates[index]);
   zoomImage();
   changeCoords("area-clickable", arrayCoordinates[index]);
   var newStart = startTimer(timerMinutes, myClock);
   intervalID = setInterval(printLose, 1000);
 };
 
-function alertWin() {
-  document.getElementById("game-img-lens").remove();
-  if (score > localStorage.getItem("highestScore")) {
-    localStorage.setItem("highestScore", score);
-    highestScore.innerHTML = localStorage.getItem("highestScore");
-  }
-  scoreRecap.innerHTML = score;
-
-  scoreFinal.innerHTML = score;
-  highScoreRecap.innerHTML = localStorage.getItem("highestScore");
-  highScoreFinal.innerHTML = localStorage.getItem("highestScore");
-  timingRecap.innerHTML = time;
-
-  index === arrayImages.length
-    ? (endGame.style.display = "block")
-    : (myWinningBox.style.display = "block");
-  endBtn.addEventListener(
-    "click",
-    () => (window.location.href = "./index.html")
-  );
+// function which changes the image of the game
+function changeImage() {
+  myImage.setAttribute("src", arrayImages[index]);
 }
 
-function alertLose() {
-  document.getElementById("game-img-lens").remove();
-  scoreRecapLose.innerHTML = score;
-  myLosingBox.style.display = "block";
-}
-
+// function that changes the coordinates of the clickable area on the picture (the area where Charlie is)
 function changeCoords(areaID, newCoords) {
   document.getElementById(areaID).coords = newCoords;
   index += 1;
 }
 
-function printWin() {
-  score = Number(myScore.textContent) + Number(myClock.innerHTML.substr(3));
-  time = myClock.innerHTML;
-  myScore.textContent = score;
-  clearInterval(myIntervalId);
-  alertWin();
+// function that enables us to zoom the image
+function zoomImage() {
+  var evt = new Event(),
+    m = new Magnifier(evt);
+  m.attach({
+    thumb: "#game-img",
+    large: (() => arrayImagesCoordinates[index])(),
+    mode: "inside",
+    zoom: 3,
+    zoomable: true,
+  });
 }
 
-function printFewTimeLeft() {
-  if (myClock.innerHTML == "00:10") {
-    myClockButton.classList.toggle("vibrate-1");
-  }
-}
 
-function changeImage() {
-  myImage.setAttribute("src", arrayImages[index]);
-}
-
+// function that makes the timer of 30 seconds start
 function startTimer(duration, display) {
   var timer = duration,
     minutes,
@@ -116,21 +94,14 @@ function startTimer(duration, display) {
   }, 1000);
 }
 
-window.onload = function () {
-  arrayImages = JSON.parse(localStorage.getItem("theArrayImages"));
-  arrayCoordinates = JSON.parse(localStorage.getItem("theArrayCoordinates"));
-  arrayImagesCoordinates = JSON.parse(
-    localStorage.getItem("theArrayImagesZoom")
-  );
-  changeImage();
-  zoomImage();
-  changeCoords("area-clickable", arrayCoordinates[index]);
+// when there is only 10 seconds left, there is an animation on the clock
+function printFewTimeLeft() {
+  if (myClock.innerHTML == "00:10") {
+    myClockButton.classList.toggle("vibrate-1");
+  }
+}
 
-  var start = startTimer(timerMinutes, myClock);
-  intervalID = setInterval(printLose, 1000);
-  var fewtimeID = setInterval(printFewTimeLeft, 1000);
-};
-
+// function which checks if the timer is finished (= 00:00). If so, we display the losing alert box, and we stop the timer
 function printLose() {
   if (document.querySelector("#time").textContent === "00:00") {
     myClockButton.classList.toggle("vibrate-1");
@@ -145,14 +116,56 @@ function printLose() {
   }
 }
 
-function zoomImage() {
-    var evt = new Event(),
-    m = new Magnifier(evt);
-    m.attach({
-        thumb: '#game-img',
-        large: (() => arrayImagesCoordinates[index])(),
-        mode: 'inside',
-        zoom: 3,
-        zoomable: true
-    });
+
+// displays the modal "losing box" and stops the zoom on the picture
+function alertLose() {
+  document.getElementById("game-img-lens").remove();
+  scoreRecapLose.innerHTML = score;
+  myLosingBox.style.display = "block";
 }
+
+//function which is called when the player has found Charlie. If so, we display the winning alert box, and we stop the timer
+function printWin() {
+  score = Number(myScore.textContent) + Number(myClock.innerHTML.substr(3));
+  time = myClock.innerHTML;
+  myScore.textContent = score;
+  clearInterval(myIntervalId);
+  alertWin();
+}
+
+//displays the modal "winning box", stops the zoom on the picture. if it is the last picture of the level, displays the end game modal. Otherwise, displays the modal "congrats, next step". also checks if the score is higher than the max score in the local storage.
+function alertWin() {
+  document.getElementById("game-img-lens").remove();
+  if (score > localStorage.getItem("highestScore")) {
+    localStorage.setItem("highestScore", score);
+    highestScore.innerHTML = localStorage.getItem("highestScore");
+  }
+  scoreRecap.innerHTML = score;
+  scoreFinal.innerHTML = score;
+  highScoreRecap.innerHTML = localStorage.getItem("highestScore");
+  highScoreFinal.innerHTML = localStorage.getItem("highestScore");
+  timingRecap.innerHTML = time;
+  index === arrayImages.length
+    ? (endGame.style.display = "block")
+    : (myWinningBox.style.display = "block");
+  endBtn.addEventListener(
+    "click",
+    () => (window.location.href = "./index.html")
+  );
+}
+
+// when the page is loading, we get the array of images and the array of coordinates that are related to the level selected on the home page. Then we charge the first image, the first clickable area, and the first zoom image. Then, we start the timer. And every second, we call the function "printFewTimeLeft" and "printLose"
+window.onload = function () {
+  arrayImages = JSON.parse(localStorage.getItem("theArrayImages"));
+  arrayCoordinates = JSON.parse(localStorage.getItem("theArrayCoordinates"));
+  arrayImagesCoordinates = JSON.parse(
+    localStorage.getItem("theArrayImagesZoom")
+  );
+  changeImage();
+  zoomImage();
+  changeCoords("area-clickable", arrayCoordinates[index]);
+
+  var start = startTimer(timerMinutes, myClock);
+  intervalID = setInterval(printLose, 1000);
+  var fewtimeID = setInterval(printFewTimeLeft, 1000);
+};

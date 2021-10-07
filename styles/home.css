@@ -121,11 +121,9 @@ map {
 }
 
 
-
 #board {
   display: block;
   cursor: pointer;
-  /* position: relative; */
 }
 
 footer {
@@ -133,7 +131,6 @@ footer {
   flex-direction: column;
   justify-content: flex-start;
   text-align: center;
-  /* bottom: 0px; */
   color: gray;
   font-size: 15px;
 }
