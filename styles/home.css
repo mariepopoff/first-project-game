@@ -120,10 +120,7 @@ map {
   z-index: 999;
 }
 
-#instruction {
-  position: absolute;
-  bottom: 15px;
-}
+
 
 #board {
   display: block;
@@ -132,10 +129,17 @@ map {
 }
 
 footer {
-  position: absolute;
-  bottom: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  text-align: center;
+  /* bottom: 0px; */
   color: gray;
   font-size: 15px;
+}
+
+#instruction, footer p {
+  padding: 0px;
 }
 
 /* The Modal (background) */
