@@ -112,7 +112,7 @@ function printLose() {
     );
     clearInterval(myIntervalId);
     clearInterval(intervalID);
-    clearInterval(fewtimeID);
+    // clearInterval(fewtimeID);
   }
 }
 
@@ -166,6 +166,7 @@ window.onload = function () {
   changeCoords("area-clickable", arrayCoordinates[index]);
 
   var start = startTimer(timerMinutes, myClock);
-  intervalID = setInterval(printLose, 1000);
   var fewtimeID = setInterval(printFewTimeLeft, 1000);
+  intervalID = setInterval(printLose, 1000);
+  
 };
